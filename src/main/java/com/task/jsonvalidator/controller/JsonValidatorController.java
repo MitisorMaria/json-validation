@@ -17,11 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class JsonValidatorController {
 
-    @Autowired
-    private ValidationHandler validationHandler;
+    private final ValidationHandler validationHandler;
+
+    private final SaveHandler saveHandler;
 
     @Autowired
-    private SaveHandler saveHandler;
+    public JsonValidatorController(ValidationHandler validationHandler, SaveHandler saveHandler) {
+        this.validationHandler = validationHandler;
+        this.saveHandler = saveHandler;
+    }
 
     /**
      * Validates a given JSON object according to a given schema. The schema is also stored with a user-given name.

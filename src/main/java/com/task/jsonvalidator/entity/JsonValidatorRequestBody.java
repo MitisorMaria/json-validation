@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JsonValidatorRequestBody {
     @Getter
-    private String schemaName;
-    @Getter
     private String schemaSource;
     @Getter
     private Object jsonObject;

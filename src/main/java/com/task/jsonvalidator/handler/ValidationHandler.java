@@ -36,6 +36,7 @@ public class ValidationHandler {
         }
 
         Set<ValidationMessage> validationMessages = jsonValidator.validate(jsonNode, schema);
-        return validationMessages.isEmpty() ? new Response(Constants.VALID_RESPONSE) : new Response(Constants.INVALID_RESPONSE);
+        return validationMessages.isEmpty() ? new Response(Constants.VALID_RESPONSE, true)
+                : new Response(Constants.INVALID_RESPONSE, false);
     }
 }

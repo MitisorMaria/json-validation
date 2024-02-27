@@ -11,4 +11,6 @@ public class Response {
 
     @Getter
     private String message;
+    @Getter
+    private boolean isValid;
 }

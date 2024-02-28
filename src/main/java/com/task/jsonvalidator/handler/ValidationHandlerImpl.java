@@ -5,10 +5,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.schema.JsonSchema;
 import com.networknt.schema.ValidationMessage;
-import com.task.jsonvalidator.entity.JsonValidatorRequestBody;
 import com.task.jsonvalidator.entity.Response;
 import com.task.jsonvalidator.util.Constants;
-import com.task.jsonvalidator.util.JsonReader;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,16 +25,14 @@ public class ValidationHandlerImpl implements ValidationHandler{
     }
 
     @Override
-    public Response validateJson(JsonValidatorRequestBody jsonValidatorRequestBody) {
+    public Response validateJson(JsonSchema schema, String jsonObject) {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonNode;
 
-        JsonSchema schema = new JsonReader().readSchema(jsonValidatorRequestBody.getSchemaSource());
         try {
-            String jsonStr = mapper.writeValueAsString(jsonValidatorRequestBody.getJsonObject());
-            jsonNode = mapper.readTree(jsonStr);
+            jsonNode = mapper.readTree(jsonObject);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            return new Response(Constants.PROCESSING_ERROR_RESPONSE, false);
         }
 
         Set<ValidationMessage> validationMessages = jsonValidator.validate(jsonNode, schema);

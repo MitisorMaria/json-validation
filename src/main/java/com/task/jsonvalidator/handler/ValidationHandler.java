@@ -1,6 +1,6 @@
 package com.task.jsonvalidator.handler;
 
-import com.task.jsonvalidator.entity.JsonValidatorRequestBody;
+import com.networknt.schema.JsonSchema;
 import com.task.jsonvalidator.entity.Response;
 
 /**
@@ -11,9 +11,9 @@ public interface ValidationHandler {
     /**
      * Validates a given JSON object against a schema stored at a given path.
      *
-     * @param jsonValidatorRequestBody object that encapsulates the JSON object to be validated,
-     * together with the path to the schema
+     * @param jsonObject the JSON string to be validated
+     * @param schema the schema used for the validation
      * @return a {@code Response} object containing information regarding the validity of the JSON object
      */
-    public Response validateJson(JsonValidatorRequestBody jsonValidatorRequestBody);
+    public Response validateJson(JsonSchema schema, String jsonObject);
 }

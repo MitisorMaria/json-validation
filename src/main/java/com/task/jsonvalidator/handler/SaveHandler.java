@@ -17,5 +17,5 @@ public interface SaveHandler {
      * @param schemaFile the schema to be stored
      * @param name the name chosen by the user for storing the schema
      */
-    public JsonSchema saveSchema(final MultipartFile schemaFile, final String name) throws IOException;
+    JsonSchema saveSchema(final MultipartFile schemaFile, final String name) throws IOException;
 }

@@ -15,7 +15,7 @@ import java.util.Set;
 
 
 @Component
-public class ValidationHandlerImpl implements ValidationHandler{
+public class ValidationHandlerImpl implements ValidationHandler {
 
     private final JsonValidator jsonValidator;
 
@@ -25,15 +25,9 @@ public class ValidationHandlerImpl implements ValidationHandler{
     }
 
     @Override
-    public Response validateJson(JsonSchema schema, String jsonObject) {
+    public Response validateJson(JsonSchema schema, String jsonObject) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode;
-
-        try {
-            jsonNode = mapper.readTree(jsonObject);
-        } catch (JsonProcessingException e) {
-            return new Response(Constants.PROCESSING_ERROR_RESPONSE, false);
-        }
+        JsonNode jsonNode = mapper.readTree(jsonObject);
 
         Set<ValidationMessage> validationMessages = jsonValidator.validate(jsonNode, schema);
         return validationMessages.isEmpty() ? new Response(Constants.VALID_RESPONSE, true)

@@ -1,5 +1,6 @@
 package com.task.jsonvalidator.handler;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.networknt.schema.JsonSchema;
 import com.task.jsonvalidator.entity.Response;
 
@@ -15,5 +16,5 @@ public interface ValidationHandler {
      * @param schema the schema used for the validation
      * @return a {@code Response} object containing information regarding the validity of the JSON object
      */
-    public Response validateJson(JsonSchema schema, String jsonObject);
+    Response validateJson(JsonSchema schema, String jsonObject) throws JsonProcessingException;
 }

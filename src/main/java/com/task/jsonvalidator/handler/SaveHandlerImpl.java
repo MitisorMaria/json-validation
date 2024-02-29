@@ -31,19 +31,14 @@ public class SaveHandlerImpl implements SaveHandler {
     @Override
     public JsonSchema saveSchema(final MultipartFile schemaFile, final String name) throws IOException {
         JsonSchema toReturn;
-        try {
-            if (schemaFile.isEmpty()) {
-                throw new IOException(Constants.ERROR_RESPONSE_EMPTY_FILE);
-            }
-            Path destinationFile = this.rootLocation.resolve(Paths.get(name + Constants.JSON_EXTENSION))
-                    .normalize().toAbsolutePath();
-            try (InputStream inputStream = schemaFile.getInputStream()) {
-                Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
-                toReturn = new JsonReader().readSchema(destinationFile.toString());
-            }
+        if (schemaFile.isEmpty()) {
+            throw new IOException(Constants.ERROR_RESPONSE_EMPTY_FILE);
         }
-        catch (Exception e) {
-            throw new IOException(Constants.ERROR_RESPONSE, e);
+        Path destinationFile =
+                this.rootLocation.resolve(Paths.get(name + Constants.JSON_EXTENSION)).normalize().toAbsolutePath();
+        try (InputStream inputStream = schemaFile.getInputStream()) {
+            Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
+            toReturn = new JsonReader().readSchema(destinationFile.toString());
         }
         return toReturn;
     }

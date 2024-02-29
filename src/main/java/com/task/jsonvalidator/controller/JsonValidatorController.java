@@ -3,6 +3,7 @@ package com.task.jsonvalidator.controller;
 import com.networknt.schema.JsonSchema;
 import com.task.jsonvalidator.controller.paramvalidator.FilePathConstraint;
 import com.task.jsonvalidator.entity.Response;
+import com.task.jsonvalidator.handler.JsonReadHandler;
 import com.task.jsonvalidator.handler.SaveHandler;
 import com.task.jsonvalidator.handler.ValidationHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,13 @@ public class JsonValidatorController {
 
     private final SaveHandler saveHandler;
 
+    private final JsonReadHandler jsonReadHandler;
+
     @Autowired
-    public JsonValidatorController(ValidationHandler validationHandler, SaveHandler saveHandler) {
+    public JsonValidatorController(ValidationHandler validationHandler, SaveHandler saveHandler, JsonReadHandler jsonReadHandler) {
         this.validationHandler = validationHandler;
         this.saveHandler = saveHandler;
+        this.jsonReadHandler = jsonReadHandler;
     }
 
     /**
@@ -46,7 +50,8 @@ public class JsonValidatorController {
     public Response validateJSON(@RequestParam @FilePathConstraint final String schemaName,
             @RequestPart final MultipartFile schemaFile,
             @RequestPart final String jsonObject) throws IOException {
-        JsonSchema uploadedSchema = saveHandler.saveSchema(schemaFile, schemaName);
+        saveHandler.saveSchema(schemaFile, schemaName);
+        JsonSchema uploadedSchema = jsonReadHandler.readSchema(schemaName);
         return validationHandler.validateJson(uploadedSchema, jsonObject);
     }
 }

@@ -1,8 +1,6 @@
 package com.task.jsonvalidator.handler;
 
-import com.networknt.schema.JsonSchema;
 import com.task.jsonvalidator.util.Constants;
-import com.task.jsonvalidator.util.JsonReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -29,8 +27,7 @@ public class SaveHandlerImpl implements SaveHandler {
     }
 
     @Override
-    public JsonSchema saveSchema(final MultipartFile schemaFile, final String name) throws IOException {
-        JsonSchema toReturn;
+    public void saveSchema(final MultipartFile schemaFile, final String name) throws IOException {
         if (schemaFile.isEmpty()) {
             throw new IOException(Constants.ERROR_RESPONSE_EMPTY_FILE);
         }
@@ -38,8 +35,6 @@ public class SaveHandlerImpl implements SaveHandler {
                 this.rootLocation.resolve(Paths.get(name + Constants.JSON_EXTENSION)).normalize().toAbsolutePath();
         try (InputStream inputStream = schemaFile.getInputStream()) {
             Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
-            toReturn = new JsonReader().readSchema(destinationFile.toString());
         }
-        return toReturn;
     }
 }

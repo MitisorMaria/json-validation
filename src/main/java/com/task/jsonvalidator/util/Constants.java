@@ -12,7 +12,9 @@ public class Constants {
     public static final String INVALID_RESPONSE = "The JSON object is invalid according to the schema you provided.";
     public static final String ERROR_RESPONSE_EMPTY_FILE = "Failed to store empty file.";
     public static final String ERROR_INVALID_JSON =
-            "The JSON content you provided is invalid. Please check the syntax of your schema and your JSON object.";
+            "The JSON content you provided is invalid. Please check the syntax of your JSON object.";
+    public static final String ERROR_INVALID_JSON_SCHEMA =
+            "The JSON schema you provided is invalid. Please check the syntax of your schema. This is the detailed error message: ";
     public static final String WRONG_FILE_NAME = "Wrong file name.";
     public static final String CURRENT_DIRECTORY = "user.dir";
     public static final String JSON_EXTENSION = ".json";

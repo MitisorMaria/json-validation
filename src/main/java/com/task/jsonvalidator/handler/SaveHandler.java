@@ -1,6 +1,5 @@
 package com.task.jsonvalidator.handler;
 
-import com.networknt.schema.JsonSchema;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -12,10 +11,10 @@ import java.io.IOException;
 public interface SaveHandler {
 
     /**
-     * Retrieves a JSON schema from the given source and stores it in the root path of the application, with the given name.
+     * Stores a JSON schema in the root path of the application, with the given name.
      *
-     * @param schemaFile the schema to be stored
+     * @param schemaFile the file containing the schema to be stored
      * @param name the name chosen by the user for storing the schema
      */
-    JsonSchema saveSchema(final MultipartFile schemaFile, final String name) throws IOException;
+    void saveSchema(final MultipartFile schemaFile, final String name) throws IOException;
 }

@@ -27,6 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
 
 
 @AutoConfigureJsonTesters
@@ -57,7 +58,7 @@ public class JsonValidatorControllerTests {
 
     @Test
     public void validJsonAccordingToSchema() throws Exception {
-        given(validationHandler.validateJson(any(), any())).willReturn(new Response(Constants.VALID_RESPONSE, true));
+        when(validationHandler.validateJson(any(), any())).thenReturn(new Response(Constants.VALID_RESPONSE, true));
 
         MockHttpServletResponse response = mvc.perform(
                 MockMvcRequestBuilders.multipart("/validate?schemaName=test")
@@ -70,7 +71,7 @@ public class JsonValidatorControllerTests {
 
     @Test
     public void invalidJsonAccordingToSchema() throws Exception {
-        given(validationHandler.validateJson(any(), any())).willReturn(new Response(Constants.INVALID_RESPONSE, false));
+        when(validationHandler.validateJson(any(), any())).thenReturn(new Response(Constants.INVALID_RESPONSE, false));
 
         MockHttpServletResponse response = mvc.perform(
                 MockMvcRequestBuilders.multipart("/validate?schemaName=test")

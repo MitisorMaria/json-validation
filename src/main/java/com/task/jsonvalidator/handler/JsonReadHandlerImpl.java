@@ -5,14 +5,14 @@ import com.networknt.schema.JsonSchemaException;
 import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.task.jsonvalidator.util.Constants;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
-@Component
+@Service
 public class JsonReadHandlerImpl implements JsonReadHandler {
 
     public JsonSchema readSchema(String name) throws JsonSchemaException {

@@ -14,7 +14,7 @@ How to run/use this application:
   As a client java application: since the API uses MultipartFile objects, in order to be able to use it, you need to convert your File object to a MultipartFile implementation, and then perform the HTTP POST request using the MultipartFile obtained and a JSON string as the request parts.
 
   You can use the following example for testing the application:
-  JSON object:
+ -  JSON object:
 {  
   "name": "Emma Watson",  
   "artist": "Paul Walker",  
@@ -22,7 +22,7 @@ How to run/use this application:
   "tags": ["oil", "famous"]  
 }  
 
-JSON schema: 
+- JSON schema: 
 {
 	"$schema": "https://json-schema.org/draft/2019-09/schema#",
 	"$id+": "http://my-paintings-api.com/schemas/painting-schema.json",

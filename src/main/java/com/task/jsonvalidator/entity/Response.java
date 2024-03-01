@@ -12,8 +12,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Response {
 
-    @Getter
-    private String message;
-    @Getter
-    private boolean isValid;
+    @Getter private String message;
+    @Getter private boolean isValid;
+
+    @Override
+    public boolean equals(Object other) {
+        if (this.getClass().equals(other.getClass())) {
+            if (this.getMessage().equals(((Response) other).getMessage()) && this.isValid == ((Response) other).isValid) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

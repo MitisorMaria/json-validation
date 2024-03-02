@@ -20,7 +20,7 @@ class JsonValidator {
      * @param jsonSchema the schema used
      * @return a set containing the validation error messages. If the object is valid, the set is empty.
      */
-    Set<ValidationMessage> validate(JsonNode jsonObject, JsonSchema jsonSchema) {
+    Set<ValidationMessage> validate(final JsonNode jsonObject, final JsonSchema jsonSchema) {
         return jsonSchema.validate(jsonObject);
     }
 }

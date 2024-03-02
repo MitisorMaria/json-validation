@@ -16,7 +16,7 @@ public class Response {
     @Getter private boolean isValid;
 
     @Override
-    public boolean equals(Object other) {
+    public boolean equals(final Object other) {
         if (this.getClass().equals(other.getClass())) {
             if (this.getMessage().equals(((Response) other).getMessage()) && this.isValid == ((Response) other).isValid) {
                 return true;

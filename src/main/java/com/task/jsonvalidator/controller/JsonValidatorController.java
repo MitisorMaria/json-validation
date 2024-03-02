@@ -9,6 +9,7 @@ import com.task.jsonvalidator.handler.ValidationHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -23,6 +24,7 @@ import java.io.IOException;
  */
 @RestController
 @Validated
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class JsonValidatorController {
 
     private final ValidationHandler validationHandler;
@@ -32,7 +34,8 @@ public class JsonValidatorController {
     private final JsonReadHandler jsonReadHandler;
 
     @Autowired
-    public JsonValidatorController(ValidationHandler validationHandler, SaveHandler saveHandler, JsonReadHandler jsonReadHandler) {
+    public JsonValidatorController(final ValidationHandler validationHandler, final SaveHandler saveHandler,
+            final JsonReadHandler jsonReadHandler) {
         this.validationHandler = validationHandler;
         this.saveHandler = saveHandler;
         this.jsonReadHandler = jsonReadHandler;
@@ -46,10 +49,11 @@ public class JsonValidatorController {
      * @param schemaFile the schema file used for validation
      * @return a {@code Response} object containing information regarding the validity of the JSON object
      */
-    @PostMapping(value = "/validate", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Response validateJSON(@RequestParam @FilePathConstraint final String schemaName,
-            @RequestPart final MultipartFile schemaFile,
-            @RequestPart final String jsonObject) throws IOException {
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(value = "/validate", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public Response validateJSON(@RequestParam("schemaName") @FilePathConstraint final String schemaName,
+            @RequestPart("schemaFile") final MultipartFile schemaFile,
+            @RequestPart("jsonObject") final String jsonObject) throws IOException {
         saveHandler.saveSchema(schemaFile, schemaName);
         JsonSchema uploadedSchema = jsonReadHandler.readSchema(schemaName);
         return validationHandler.validateJson(uploadedSchema, jsonObject);

@@ -16,5 +16,5 @@ public interface ValidationHandler {
      * @param schema the schema used for the validation
      * @return a {@code Response} object containing information regarding the validity of the JSON object
      */
-    Response validateJson(JsonSchema schema, String jsonObject) throws JsonProcessingException;
+    Response validateJson(final JsonSchema schema, final String jsonObject) throws JsonProcessingException;
 }

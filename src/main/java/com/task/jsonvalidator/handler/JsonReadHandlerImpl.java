@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 @Service
 public class JsonReadHandlerImpl implements JsonReadHandler {
 
-    public JsonSchema readSchema(String name) throws JsonSchemaException {
+    public JsonSchema readSchema(final String name) throws JsonSchemaException {
         Path destinationFile = Paths.get(System.getProperty(Constants.CURRENT_DIRECTORY))
                 .resolve(Paths.get(name + Constants.JSON_EXTENSION)).normalize().toAbsolutePath();
         JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V201909);

@@ -20,12 +20,12 @@ public class ValidationHandlerImpl implements ValidationHandler {
     private final JsonValidator jsonValidator;
 
     @Autowired
-    public ValidationHandlerImpl(JsonValidator jsonValidator) {
+    public ValidationHandlerImpl(final JsonValidator jsonValidator) {
         this.jsonValidator = jsonValidator;
     }
 
     @Override
-    public Response validateJson(JsonSchema schema, String jsonObject) throws JsonProcessingException {
+    public Response validateJson(final JsonSchema schema, final String jsonObject) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonNode = mapper.readTree(jsonObject);
 

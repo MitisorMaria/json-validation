@@ -13,5 +13,5 @@ public interface JsonReadHandler {
      * @param path the path of the schema
      * @return a {@code JsonSchema} object containing the schema from the file
      */
-    JsonSchema readSchema(String path);
+    JsonSchema readSchema(final String path);
 }
